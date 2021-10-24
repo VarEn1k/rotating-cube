@@ -1,13 +1,13 @@
-import * as THREE
-  from 'https://cdn.skypack.dev/three@0.133.1/build/three.module.js';
-import {OrbitControls} from 'https://cdn.skypack.dev/three@0.133.1/examples/jsm/controls/OrbitControls.js';
+import * as THREE from 'three/build/three.module.js';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 
 class App {
   constructor() {
     const container = document.createElement('div');
     document.body.appendChild(container);
+
     this.camera = new THREE.PerspectiveCamera(60,
-        window.innerWidth / window.innerHeight, 0.1, 100)
+        window.innerWidth / window.innerHeight, 0.1, 100);
     this.camera.position.set(0, 0, 4);
 
     this.scene = new THREE.Scene();
@@ -26,7 +26,7 @@ class App {
     container.appendChild(this.renderer.domElement);
 
     const geometry = new THREE.BoxBufferGeometry();
-    const material = new THREE.MeshStandardMaterial({color: 0xff0000});
+    const material = new THREE.MeshStandardMaterial({color: 0xFF0000});
 
     this.mesh = new THREE.Mesh(geometry, material);
 
@@ -36,21 +36,19 @@ class App {
 
     this.renderer.setAnimationLoop(this.render.bind(this));
 
-    window.addEventListen('resize', this.resize.bind(this));
-
     window.addEventListener('resize', this.resize.bind(this));
   }
 
   resize() {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
-    this.renderer().setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
   render() {
+    this.mesh.rotateX(0.005);
     this.mesh.rotateY(0.01);
     this.renderer.render(this.scene, this.camera);
-
   }
 }
 
