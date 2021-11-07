@@ -25,12 +25,20 @@ class App {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     container.appendChild(this.renderer.domElement);
 
+    // Add cube
     const geometry = new THREE.BoxBufferGeometry();
     const material = new THREE.MeshStandardMaterial({color: 0xFF0000});
 
     this.mesh = new THREE.Mesh(geometry, material);
 
     this.scene.add(this.mesh);
+
+    //add sphere
+    const geometrySphere = new THREE.SphereGeometry( 3, 32, 16 );
+    const materialSphere = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+    const sphere = new THREE.Mesh( geometrySphere, materialSphere );
+    sphere.position.x = 3.5
+   this.scene.add( sphere );
 
     const controls = new OrbitControls(this.camera, this.renderer.domElement);
 
