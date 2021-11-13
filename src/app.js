@@ -26,19 +26,28 @@ class App {
     container.appendChild(this.renderer.domElement);
 
     // Add cube
-    const geometry = new THREE.BoxBufferGeometry();
-    const material = new THREE.MeshStandardMaterial({color: 0xFF0000});
-
-    this.mesh = new THREE.Mesh(geometry, material);
-
-    this.scene.add(this.mesh);
+    // const geometry = new THREE.BoxBufferGeometry();
+    // const material = new THREE.MeshStandardMaterial({color: 0xFF0000});
+    //
+    // this.mesh = new THREE.Mesh(geometry, material);
+    //
+    // this.scene.add(this.mesh);
 
     //add sphere
-    const geometrySphere = new THREE.SphereGeometry( 3, 32, 16 );
-    const materialSphere = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
-    const sphere = new THREE.Mesh( geometrySphere, materialSphere );
-    sphere.position.x = 3.5
-   this.scene.add( sphere );
+    // const geometrySphere = new THREE.SphereGeometry( 1, 32, 16 );
+    //  const materialSphere = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+    //  const sphere = new THREE.Mesh( geometrySphere, materialSphere );
+    //  sphere.position.x = 2
+    //this.scene.add( sphere );
+
+    const geometryKnot = new THREE.TorusKnotBufferGeometry( .8, .3, 120, 16 );
+    //const materialKnot = new THREE.MeshStandardMaterial( { color: 0xfff00 })
+    const materialKnot = new THREE.MeshPhongMaterial( { color: 0xfff00, specular: 0x444444, shininess: 60 } );
+    this.knot = new THREE.Mesh( geometryKnot, materialKnot );
+    this.knot.position.x = 0
+
+
+    this.scene.add( this.knot );
 
     const controls = new OrbitControls(this.camera, this.renderer.domElement);
 
@@ -54,8 +63,10 @@ class App {
   }
 
   render() {
-    this.mesh.rotateX(0.005);
-    this.mesh.rotateY(0.01);
+    // this.mesh.rotateX(0.005);
+    // this.mesh.rotateY(0.01);
+    this.knot.rotateY(0.01);
+    this.knot.rotateX(0.02);
     this.renderer.render(this.scene, this.camera);
   }
 }
